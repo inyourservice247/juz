@@ -3,139 +3,220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Juz Amma 45-Day Plan</title>
+<title>Juz Amma App</title>
 
 <style>
 body {
-  font-family: Inter, Arial, sans-serif;
-  background: #0f172a;
-  color: #e5e7eb;
-  margin: 0;
-  padding: 20px;
+  font-family: Inter, system-ui;
+  background:#0b1220;
+  color:#e5e7eb;
+  margin:0;
+}
+
+.container {
+  max-width:500px;
+  margin:auto;
+  padding:16px;
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 20px;
+  text-align:center;
+  font-size:20px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #111827;
-  border-radius: 10px;
-  overflow: hidden;
+.card {
+  background:#111827;
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:12px;
 }
 
-th, td {
-  padding: 10px;
-  text-align: left;
+.progress {
+  height:6px;
+  background:#1f2937;
+  border-radius:4px;
+  overflow:hidden;
+}
+.bar {
+  height:100%;
+  background:#22c55e;
+  width:0%;
 }
 
-th {
-  background: #1f2937;
-  font-size: 13px;
-  color: #9ca3af;
+.streak {
+  font-size:13px;
+  color:#9ca3af;
 }
 
-tr {
-  border-bottom: 1px solid #1f2937;
-}
-
-tr:hover {
-  background: #1a2233;
+.today {
+  border-left:4px solid #22c55e;
 }
 
 .badge {
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 12px;
+  padding:2px 6px;
+  border-radius:6px;
+  font-size:11px;
 }
 
-.phase1 { background: #1e3a8a; }
-.phase2 { background: #14532d; }
-.phase3 { background: #78350f; }
-.cons { background: #4c1d95; }
-.final { background: #831843; }
+.p1{background:#1e3a8a;}
+.p2{background:#14532d;}
+.p3{background:#78350f;}
+.p4{background:#4c1d95;}
+.p5{background:#831843;}
 
-.load-light { color: #22c55e; }
-.load-medium { color: #f59e0b; }
-.load-heavy { color: #ef4444; }
+button {
+  background:#22c55e;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.prayers label {
+  display:inline-block;
+  margin:4px;
+  font-size:12px;
+}
 </style>
 </head>
 
 <body>
+<div class="container">
 
-<h1>Juz Amma – 45 Day Memorization Plan</h1>
+<h1>Juz Amma System</h1>
 
-<table>
-<thead>
-<tr>
-<th>Day</th>
-<th>Date</th>
-<th>Phase</th>
-<th>New</th>
-<th>Review</th>
-<th>Load</th>
-</tr>
-</thead>
+<div class="card">
+  <div class="streak">🔥 Streak: <span id="streak">0</span> days</div>
+  <div class="progress"><div id="bar" class="bar"></div></div>
+</div>
 
-<tbody>
+<div class="card today" id="todayCard"></div>
 
-<tr><td>1</td><td>Apr 11</td><td><span class="badge phase1">Phase 1</span></td><td>Page 1</td><td>—</td><td class="load-medium">Medium</td></tr>
-<tr><td>2</td><td>Apr 12</td><td><span class="badge phase1">Phase 1</span></td><td>—</td><td>R1 Page 1</td><td class="load-light">Light</td></tr>
-<tr><td>3</td><td>Apr 13</td><td><span class="badge phase1">Phase 1</span></td><td>Page 2</td><td>R2 Page 1</td><td class="load-medium">Medium</td></tr>
-<tr><td>4</td><td>Apr 14</td><td><span class="badge phase1">Phase 1</span></td><td>—</td><td>R1 Page 2</td><td class="load-light">Light</td></tr>
-<tr><td>5</td><td>Apr 15</td><td><span class="badge phase1">Phase 1</span></td><td>Page 3</td><td>R2 Page 2</td><td class="load-medium">Medium</td></tr>
-<tr><td>6</td><td>Apr 16</td><td><span class="badge phase1">Phase 1</span></td><td>—</td><td>R1 Page 3</td><td class="load-light">Light</td></tr>
-<tr><td>7</td><td>Apr 17</td><td><span class="badge phase1">Phase 1</span></td><td>Page 4</td><td>Weekly review</td><td class="load-heavy">Heavy</td></tr>
+<div class="card">
+  <strong>Daily Ibadah</strong>
+  <div class="prayers">
+    <label><input type="checkbox" class="p"> Fajr</label>
+    <label><input type="checkbox" class="p"> Dhuhr</label>
+    <label><input type="checkbox" class="p"> Asr</label>
+    <label><input type="checkbox" class="p"> Maghrib</label>
+    <label><input type="checkbox" class="p"> Isha</label>
+    <label><input type="checkbox" class="p"> Qiyam (2)</label>
+  </div>
+</div>
 
-<tr><td>8</td><td>Apr 18</td><td><span class="badge phase1">Phase 1</span></td><td>—</td><td>R1 Page 4</td><td class="load-light">Light</td></tr>
-<tr><td>9</td><td>Apr 19</td><td><span class="badge phase1">Phase 1</span></td><td>Page 5</td><td>R2 Page 4</td><td class="load-medium">Medium</td></tr>
-<tr><td>10</td><td>Apr 20</td><td><span class="badge phase1">Phase 1</span></td><td>—</td><td>R1 Page 5</td><td class="load-light">Light</td></tr>
-<tr><td>11</td><td>Apr 21</td><td><span class="badge phase1">Phase 1</span></td><td>Page 6</td><td>R2 Page 5</td><td class="load-medium">Medium</td></tr>
-<tr><td>12</td><td>Apr 22</td><td><span class="badge phase1">Phase 1</span></td><td>—</td><td>R1 Page 6</td><td class="load-light">Light</td></tr>
-<tr><td>13</td><td>Apr 23</td><td><span class="badge phase1">Phase 1</span></td><td>Page 7</td><td>Weekly review</td><td class="load-heavy">Heavy</td></tr>
-<tr><td>14</td><td>Apr 24</td><td><span class="badge phase1">Phase 1</span></td><td>—</td><td>R1 Page 7</td><td class="load-light">Light</td></tr>
+<div id="list"></div>
 
-<tr><td>15</td><td>Apr 25</td><td><span class="badge phase2">Phase 2</span></td><td>Page 8</td><td>R2 Page 7</td><td class="load-medium">Medium</td></tr>
-<tr><td>16</td><td>Apr 26</td><td><span class="badge phase2">Phase 2</span></td><td>—</td><td>R1 Page 8</td><td class="load-light">Light</td></tr>
-<tr><td>17</td><td>Apr 27</td><td><span class="badge phase2">Phase 2</span></td><td>Page 9</td><td>R2 Page 8</td><td class="load-medium">Medium</td></tr>
-<tr><td>18</td><td>Apr 28</td><td><span class="badge phase2">Phase 2</span></td><td>—</td><td>R1 Page 9</td><td class="load-light">Light</td></tr>
-<tr><td>19</td><td>Apr 29</td><td><span class="badge phase2">Phase 2</span></td><td>Page 10</td><td>R2 Page 9</td><td class="load-medium">Medium</td></tr>
-<tr><td>20</td><td>Apr 30</td><td><span class="badge phase2">Phase 2</span></td><td>—</td><td>R1 Page 10</td><td class="load-light">Light</td></tr>
-<tr><td>21</td><td>May 1</td><td><span class="badge phase2">Phase 2</span></td><td>Page 11</td><td>Weekly review</td><td class="load-heavy">Heavy</td></tr>
+</div>
 
-<tr><td>22</td><td>May 2</td><td><span class="badge phase2">Phase 2</span></td><td>—</td><td>R1 Page 11</td><td class="load-light">Light</td></tr>
-<tr><td>23</td><td>May 3</td><td><span class="badge phase2">Phase 2</span></td><td>Page 12</td><td>R2 Page 11</td><td class="load-medium">Medium</td></tr>
-<tr><td>24</td><td>May 4</td><td><span class="badge phase2">Phase 2</span></td><td>—</td><td>R1 Page 12</td><td class="load-light">Light</td></tr>
-<tr><td>25</td><td>May 5</td><td><span class="badge phase2">Phase 2</span></td><td>Page 13</td><td>R2 Page 12</td><td class="load-medium">Medium</td></tr>
-<tr><td>26</td><td>May 6</td><td><span class="badge phase2">Phase 2</span></td><td>—</td><td>R1 Page 13</td><td class="load-light">Light</td></tr>
-<tr><td>27</td><td>May 7</td><td><span class="badge phase2">Phase 2</span></td><td>Page 14</td><td>R2 Page 13</td><td class="load-medium">Medium</td></tr>
-<tr><td>28</td><td>May 8</td><td><span class="badge phase2">Phase 2</span></td><td>—</td><td>Weekly review</td><td class="load-heavy">Heavy</td></tr>
+<script>
+const start = new Date(2026,3,11);
+const days = 45;
 
-<tr><td>29</td><td>May 9</td><td><span class="badge phase3">Phase 3</span></td><td>Page 15</td><td>R2 Page 14</td><td class="load-medium">Medium</td></tr>
-<tr><td>30</td><td>May 10</td><td><span class="badge phase3">Phase 3</span></td><td>—</td><td>R1 Page 15</td><td class="load-light">Light</td></tr>
-<tr><td>31</td><td>May 11</td><td><span class="badge phase3">Phase 3</span></td><td>Page 16</td><td>R2 Page 15</td><td class="load-medium">Medium</td></tr>
-<tr><td>32</td><td>May 12</td><td><span class="badge phase3">Phase 3</span></td><td>—</td><td>R1 Page 16</td><td class="load-light">Light</td></tr>
-<tr><td>33</td><td>May 13</td><td><span class="badge phase3">Phase 3</span></td><td>Page 17</td><td>R2 Page 16</td><td class="load-medium">Medium</td></tr>
-<tr><td>34</td><td>May 14</td><td><span class="badge phase3">Phase 3</span></td><td>—</td><td>R1 Page 17</td><td class="load-light">Light</td></tr>
-<tr><td>35</td><td>May 15</td><td><span class="badge phase3">Phase 3</span></td><td>Page 18</td><td>Weekly review</td><td class="load-heavy">Heavy</td></tr>
+const tasks = [
+"Memorize Page 1","Rev Page 1","Memorize Page 2","Rev Page 2",
+"Memorize Page 3","Rev Page 3","Memorize Page 4 + Weekly",
+"Rev Page 4","Memorize Page 5","Rev Page 5",
+"Memorize Page 6","Rev Page 6","Memorize Page 7 + Weekly","Rev Page 7",
 
-<tr><td>36</td><td>May 16</td><td><span class="badge cons">Consolidation</span></td><td>Page 19</td><td>R1 Page 19</td><td class="load-medium">Medium</td></tr>
-<tr><td>37</td><td>May 17</td><td><span class="badge cons">Consolidation</span></td><td>—</td><td>Full revision</td><td class="load-heavy">Heavy</td></tr>
-<tr><td>38</td><td>May 18</td><td><span class="badge cons">Consolidation</span></td><td>Page 20</td><td>R2 Page 19</td><td class="load-medium">Medium</td></tr>
-<tr><td>39</td><td>May 19</td><td><span class="badge cons">Consolidation</span></td><td>—</td><td>Full revision</td><td class="load-heavy">Heavy</td></tr>
-<tr><td>40</td><td>May 20</td><td><span class="badge cons">Consolidation</span></td><td>Page 21</td><td>R1 Page 21</td><td class="load-medium">Medium</td></tr>
-<tr><td>41</td><td>May 21</td><td><span class="badge cons">Consolidation</span></td><td>—</td><td>Full revision</td><td class="load-heavy">Heavy</td></tr>
-<tr><td>42</td><td>May 22</td><td><span class="badge cons">Consolidation</span></td><td>Page 22</td><td>R1 Page 22</td><td class="load-heavy">Heavy</td></tr>
+"Memorize Page 8","Rev Page 8","Memorize Page 9","Rev Page 9",
+"Memorize Page 10","Rev Page 10","Memorize Page 11 + Weekly",
+"Rev Page 11","Memorize Page 12","Rev Page 12",
+"Memorize Page 13","Rev Page 13","Memorize Page 14","Weekly Review",
 
-<tr><td>43</td><td>May 23</td><td><span class="badge final">Final</span></td><td>—</td><td>Record full recitation</td><td class="load-heavy">Heavy</td></tr>
-<tr><td>44</td><td>May 24</td><td><span class="badge final">Final</span></td><td>—</td><td>Fix errors</td><td class="load-heavy">Heavy</td></tr>
-<tr><td>45</td><td>May 25</td><td><span class="badge final">Final</span></td><td>—</td><td>Final recitation</td><td class="load-medium">Medium</td></tr>
+"Memorize Page 15","Rev Page 15","Memorize Page 16","Rev Page 16",
+"Memorize Page 17","Rev Page 17","Memorize Page 18 + Weekly",
 
-</tbody>
-</table>
+"Memorize Page 19","Full Revision",
+"Memorize Page 20","Full Revision",
+"Memorize Page 21","Full Revision",
+"Memorize Page 22",
+
+"Full Recitation + Record",
+"Fix Errors",
+"Final Recitation"
+];
+
+function phase(i){
+  if(i<14) return ["Build","p1"];
+  if(i<28) return ["Load","p2"];
+  if(i<35) return ["Heavy","p3"];
+  if(i<42) return ["Consolidate","p4"];
+  return ["Final","p5"];
+}
+
+// daily reset prayers
+const todayKey = new Date().toDateString();
+if(localStorage.getItem("lastDay")!==todayKey){
+  document.querySelectorAll(".p").forEach((p,i)=>{
+    localStorage.setItem("p"+i,false);
+  });
+  localStorage.setItem("lastDay",todayKey);
+}
+
+// load prayers
+document.querySelectorAll(".p").forEach((p,i)=>{
+  p.checked = localStorage.getItem("p"+i)==="true";
+  p.onchange=()=>localStorage.setItem("p"+i,p.checked);
+});
+
+// render list
+let list=document.getElementById("list");
+let todayIndex = Math.floor((new Date()-start)/(1000*60*60*24));
+
+for(let i=0;i<days;i++){
+  let div=document.createElement("div");
+  div.className="card";
+
+  let d=new Date(start);
+  d.setDate(start.getDate()+i);
+
+  let [p,label]=phase(i);
+
+  let checked = localStorage.getItem("d"+i)==="true";
+
+  div.innerHTML=`
+    <div><b>Day ${i+1}</b> — ${d.toDateString().slice(4,10)}</div>
+    <div><span class="badge ${label}">${p}</span></div>
+    <div>${tasks[i]}</div>
+    <button onclick="toggle(${i})">${checked?"Done":"Mark Done"}</button>
+  `;
+
+  if(i===todayIndex){
+    document.getElementById("todayCard").innerHTML=div.innerHTML;
+    div.style.display="none";
+  }
+
+  list.appendChild(div);
+}
+
+function toggle(i){
+  let val = localStorage.getItem("d"+i)==="true";
+  localStorage.setItem("d"+i,!val);
+  location.reload();
+}
+
+// progress
+function update(){
+  let done=0;
+  for(let i=0;i<days;i++){
+    if(localStorage.getItem("d"+i)==="true") done++;
+  }
+  document.getElementById("bar").style.width=(done/days*100)+"%";
+}
+update();
+
+// streak
+function streak(){
+  let s=0;
+  for(let i=0;i<days;i++){
+    if(localStorage.getItem("d"+i)==="true") s++;
+    else break;
+  }
+  document.getElementById("streak").innerText=s;
+}
+streak();
+
+</script>
 
 </body>
 </html>
