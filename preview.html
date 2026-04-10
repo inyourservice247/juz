@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juz Amma App</title>
+
+<style>
+body {
+  font-family: Inter, system-ui;
+  background:#0b1220;
+  color:#e5e7eb;
+  margin:0;
+}
+
+.container {
+  max-width:500px;
+  margin:auto;
+  padding:16px;
+}
+
+h1 {
+  text-align:center;
+  font-size:20px;
+}
+
+.card {
+  background:#111827;
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+
+.progress {
+  height:6px;
+  background:#1f2937;
+  border-radius:4px;
+  overflow:hidden;
+}
+.bar {
+  height:100%;
+  background:#22c55e;
+  width:0%;
+}
+
+.streak {
+  font-size:13px;
+  color:#9ca3af;
+}
+
+.today {
+  border-left:4px solid #22c55e;
+}
+
+.badge {
+  padding:2px 6px;
+  border-radius:6px;
+  font-size:11px;
+}
+
+.p1{background:#1e3a8a;}
+.p2{background:#14532d;}
+.p3{background:#78350f;}
+.p4{background:#4c1d95;}
+.p5{background:#831843;}
+
+button {
+  background:#22c55e;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.prayers label {
+  display:inline-block;
+  margin:4px;
+  font-size:12px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>Juz Amma System</h1>
+
+<div class="card">
+  <div class="streak">🔥 Streak: <span id="streak">0</span> days</div>
+  <div class="progress"><div id="bar" class="bar"></div></div>
+</div>
+
+<div class="card today" id="todayCard"></div>
+
+<div class="card">
+  <strong>Daily Ibadah</strong>
+  <div class="prayers">
+    <label><input type="checkbox" class="p"> Fajr</label>
+    <label><input type="checkbox" class="p"> Dhuhr</label>
+    <label><input type="checkbox" class="p"> Asr</label>
+    <label><input type="checkbox" class="p"> Maghrib</label>
+    <label><input type="checkbox" class="p"> Isha</label>
+    <label><input type="checkbox" class="p"> Qiyam (2)</label>
+  </div>
+</div>
+
+<div id="list"></div>
+
+</div>
+
+<script>
+const start = new Date(2026,3,11);
+const days = 45;
+
+const tasks = [
+"Memorize Page 1","Rev Page 1","Memorize Page 2","Rev Page 2",
+"Memorize Page 3","Rev Page 3","Memorize Page 4 + Weekly",
+"Rev Page 4","Memorize Page 5","Rev Page 5",
+"Memorize Page 6","Rev Page 6","Memorize Page 7 + Weekly","Rev Page 7",
+
+"Memorize Page 8","Rev Page 8","Memorize Page 9","Rev Page 9",
+"Memorize Page 10","Rev Page 10","Memorize Page 11 + Weekly",
+"Rev Page 11","Memorize Page 12","Rev Page 12",
+"Memorize Page 13","Rev Page 13","Memorize Page 14","Weekly Review",
+
+"Memorize Page 15","Rev Page 15","Memorize Page 16","Rev Page 16",
+"Memorize Page 17","Rev Page 17","Memorize Page 18 + Weekly",
+
+"Memorize Page 19","Full Revision",
+"Memorize Page 20","Full Revision",
+"Memorize Page 21","Full Revision",
+"Memorize Page 22",
+
+"Full Recitation + Record",
+"Fix Errors",
+"Final Recitation"
+];
+
+function phase(i){
+  if(i<14) return ["Build","p1"];
+  if(i<28) return ["Load","p2"];
+  if(i<35) return ["Heavy","p3"];
+  if(i<42) return ["Consolidate","p4"];
+  return ["Final","p5"];
+}
+
+// daily reset prayers
+const todayKey = new Date().toDateString();
+if(localStorage.getItem("lastDay")!==todayKey){
+  document.querySelectorAll(".p").forEach((p,i)=>{
+    localStorage.setItem("p"+i,false);
+  });
+  localStorage.setItem("lastDay",todayKey);
+}
+
+// load prayers
+document.querySelectorAll(".p").forEach((p,i)=>{
+  p.checked = localStorage.getItem("p"+i)==="true";
+  p.onchange=()=>localStorage.setItem("p"+i,p.checked);
+});
+
+// render list
+let list=document.getElementById("list");
+let todayIndex = Math.floor((new Date()-start)/(1000*60*60*24));
+
+for(let i=0;i<days;i++){
+  let div=document.createElement("div");
+  div.className="card";
+
+  let d=new Date(start);
+  d.setDate(start.getDate()+i);
+
+  let [p,label]=phase(i);
+
+  let checked = localStorage.getItem("d"+i)==="true";
+
+  div.innerHTML=`
+    <div><b>Day ${i+1}</b> — ${d.toDateString().slice(4,10)}</div>
+    <div><span class="badge ${label}">${p}</span></div>
+    <div>${tasks[i]}</div>
+    <button onclick="toggle(${i})">${checked?"Done":"Mark Done"}</button>
+  `;
+
+  if(i===todayIndex){
+    document.getElementById("todayCard").innerHTML=div.innerHTML;
+    div.style.display="none";
+  }
+
+  list.appendChild(div);
+}
+
+function toggle(i){
+  let val = localStorage.getItem("d"+i)==="true";
+  localStorage.setItem("d"+i,!val);
+  location.reload();
+}
+
+// progress
+function update(){
+  let done=0;
+  for(let i=0;i<days;i++){
+    if(localStorage.getItem("d"+i)==="true") done++;
+  }
+  document.getElementById("bar").style.width=(done/days*100)+"%";
+}
+update();
+
+// streak
+function streak(){
+  let s=0;
+  for(let i=0;i<days;i++){
+    if(localStorage.getItem("d"+i)==="true") s++;
+    else break;
+  }
+  document.getElementById("streak").innerText=s;
+}
+streak();
+
+</script>
+
+</body>
+</html>
